@@ -4,4 +4,8 @@ class Board
     @state = Array.new(9, " ")
   end
 
+  def valid_position? position
+    return @state[position] == " " ? true : false
+  end
+
 end
