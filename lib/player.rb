@@ -1,5 +1,7 @@
+## ATTENTION - MAY HAVE TO CALL SUPER!
+
 class Player
-  attr_reader :mark
+  attr_reader :mark, :decide_position, :play
 
   def initialize mark
     @mark = mark
@@ -9,22 +11,24 @@ class Player
     board.state[position] = @mark if board.valid_position?(position)
   end
 
-  private
-
+  def decide_position
+  end
 
 end
 
 class ComputerMin < Player
-  def decide
+  def decide_position
+    Random.rand(9)
   end
 end
 
 class ComputerMax < Player
-  def decide
+  def decide_position
+    Random.rand(9)
   end
 end
 
 class Human < Player
-  def decide
+  def decide_position
   end
 end

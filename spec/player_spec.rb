@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe '#play' do
-  
+
   let(:board) { Board.new }
   let(:ai_min) { ComputerMin.new("x") }
   let(:ai_max) { ComputerMax.new("o") }

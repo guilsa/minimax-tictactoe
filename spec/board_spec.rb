@@ -1,16 +1,24 @@
 require 'spec_helper'
 
-describe "state" do
+describe "#state" do
   it "should return a board state" do
     board = Board.new
     expect(board.state).to eq([" ", " ", " "," ", " ", " "," ", " ", " "])
   end
 end
 
-describe "valid_position" do
+describe "#valid_position" do
   it "should know whether a position is empty or not" do
     board = Board.new
     expect(board.valid_position?(0)).to be(true)
+  end
+end
+
+describe "#win?" do
+  it "should return true if player won" do
+    # game = GameRunner.new
+    # game.current_player.play(1)
+    # game.current_player
   end
 end
 
