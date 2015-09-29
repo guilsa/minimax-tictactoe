@@ -24,7 +24,13 @@ require 'spec_helper'
 describe "#start_the_game" do
   it "should start and end the game with a winner or a draw" do
     game = Tictactoe.new
-    game.play_the_game
+    board = Board.new
+    ai_max = Computer.new("x", Max.new)
+    ai_min = Computer.new("o", Min.new)
+    players = [ai_max, ai_min]
+
+
+    game.play_the_game board, players
     game.print_board
     # expect(game.winner).to include("x", "o")
   end
