@@ -2,17 +2,38 @@ require 'board'
 require 'player'
 require 'pry'
 
-module Rules
+class Game
+  def play_the_game
+    until game_over?
+      player.play @board, player.get_position
+      take_turns @players
+    end
+  end
+
+  def game_over?
+    return winner?(@board) || draw?(@board) ? true : false
+  end
+end
+
+class Tictactoe < Game
+
   WIN_POS = [[0, 3, 6], [1, 4, 7], [2, 5, 8],
              [0, 1, 2], [3, 4, 5], [6, 7, 8],
              [0, 4, 8], [2, 4, 6]]
 
+  def initialize
+    @board = Board.new
+    @ai_max = Computer.new("x", Max.new)
+    @ai_min = Computer.new("o", Min.new)
+    @players = [@ai_max, @ai_min]
+  end
+
   def winner? board
-    winners_pos = []
-    WIN_POS.each do |combination|
-      combination.each { |position| winners_pos << board.state[position] }
-      return true if winners_pos.all? { |i| i == "x" } || winners_pos.all? { |i| i == "o" }
-      winners_pos = []
+    saved_positions = []
+    WIN_POS.each do |some|
+      some.each { |position| saved_positions << board.state[position] }
+      return true if saved_positions.all? { |i| i == "x" } || saved_positions.all? { |i| i == "o" }
+      saved_positions = []
     end
     return false
   end
@@ -23,31 +44,6 @@ module Rules
 
   def take_turns players
     players.rotate!
-  end
-
-end
-
-class Tictactoe
-  include Rules
-
-  attr_reader :count
-
-  def initialize
-    @board = Board.new
-    @ai_max = ComputerMax.new("x")
-    @ai_min = ComputerMin.new("o")
-    @players = [@ai_max, @ai_min]
-  end
-
-  def play_the_game
-    until game_over?
-      player.play @board, player.decide_position
-      take_turns @players
-    end
-  end
-
-  def game_over?
-    return winner?(@board) || draw?(@board) ? true : false
   end
 
   def print_board

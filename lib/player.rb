@@ -1,34 +1,50 @@
-## ATTENTION - MAY HAVE TO CALL SUPER!
-
 class Player
-  attr_reader :mark, :decide_position, :play
-
-  def initialize mark
-    @mark = mark
-  end
 
   def play board, position
     board.state[position] = @mark if board.valid_position?(position)
   end
 
-  def decide_position
+  def get_position
   end
 
-end
-
-class ComputerMin < Player
-  def decide_position
-    Random.rand(9)
-  end
-end
-
-class ComputerMax < Player
-  def decide_position
-    Random.rand(9)
-  end
 end
 
 class Human < Player
-  def decide_position
+
+  def get_position
+  end
+
+end
+
+class Computer < Player
+
+  attr_accessor :game_strategy
+
+  def initialize mark, game_strategy
+    @mark = mark
+    @game_strategy = game_strategy
+  end
+
+  def get_position
+    @game_strategy.get_position
+  end
+
+end
+
+class Min
+  def get_position
+    Random.rand(9)
   end
 end
+
+class Max
+  def get_position
+    Random.rand(9)
+  end
+end
+
+# Terminal/web input for human to make a decision
+# class IO
+#   def get_position
+#   end
+# end
