@@ -28,10 +28,8 @@ describe "#start_the_game" do
     ai_max = Computer.new("x", Max.new)
     ai_min = Computer.new("o", Min.new)
     players = [ai_max, ai_min]
-
-
     game.play_the_game board, players
-    game.print_board
+    board.print
     # expect(game.winner).to include("x", "o")
   end
 end

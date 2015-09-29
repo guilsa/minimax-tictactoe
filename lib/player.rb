@@ -1,10 +1,11 @@
+require 'forwardable'
+
 # Why use inheritance when I should prefer composition?
 # No plan of having anything else as a base class. It's a learning experience.
 
 module Minmax
 
   def score
-
   end
 
   # Should I pass the Board object or board_state (the array object)?
@@ -26,24 +27,14 @@ module Minmax
 
   end
 
-  private
-
-  def get_available_positions
-    available_positions = []
-    @board.each_with_index { |mark, index| available_positions << index if mark == " " }
-    return available_positions
-  end
-
 end
 
-class Player
+# Todo: switch this to composition
+module Player
 
   def play board, position
     @board = board
     @board.state[position] = @mark if @board.valid_position?(position)
-  end
-
-  def get_position
   end
 
 end
@@ -53,53 +44,71 @@ module TicTacToePlayer
 end
 
 class Human
+  include Player
   include TicTacToePlayer
 
   def initialize mark
     self.mark =  mark
   end
 
-  def get_position
+  def next_move
   end
 
+  def name
+    "Gil"
+  end
 end
 
-class Computer < Player
+class Computer
+  extend Forwardable
+  include Player
   include TicTacToePlayer
-  attr_accessor :game_strategy
 
   def initialize mark, game_strategy
     self.mark =  mark
     @game_strategy = game_strategy
   end
 
-  def get_position
-    @game_strategy.get_position
-  end
+  def_delegators :@game_strategy, :next_move, :name
+  # def next_move board
+  #   @game_strategy.next_move board
+  # end
+
+  # def next_move *args, &block
+  #   @game_strategy.next_move(*args, &block)
+  # end
 
 end
 
 class Min
-  def get_position
+  def next_move board
     # Player might not play because it'll only try once and move on to the next player.
     # Bad way to mock the minmax behavior.
     # Ultimately that was my object though. Mock it so I can understand it.
-    play = Random.rand(9)
+    play = board.get_available_positions.sample
     puts "Min plays: #{play}"
     play
+  end
+
+  def name
+    "Minual"
   end
 end
 
 class Max
-  def get_position
-    play = Random.rand(9)
+  def next_move board
+    play = board.get_available_positions.sample
     puts "Max plays: #{play}"
     play
   end
+
+  def name
+    "Maximillian"
+  end
 end
 
-# IO Class for terminal/web input so that Human can get_position
+# IO Class for terminal/web input so that Human can next_move
 # class IO
-#   def get_position
+#   def next_move
 #   end
 # end

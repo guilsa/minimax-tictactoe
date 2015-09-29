@@ -1,5 +1,5 @@
-require 'board'
-require 'player'
+require_relative 'board'
+require_relative 'player'
 require 'pry'
 
 class Game
@@ -9,7 +9,7 @@ class Game
     @board = board
     @players = players
     until game_over?
-      player.play board, player.get_position
+      player.play board, player.next_move(@board)
       take_turns @players
     end
   end
@@ -51,16 +51,6 @@ class Tictactoe < Game
     !@board.state.include?(" ")
   end
 
-  def print_board
-    puts ""
-    puts " #{@board.state[0]} | #{@board.state[1]} | #{@board.state[2]}  "
-    puts "---+---+---"
-    puts " #{@board.state[3]} | #{@board.state[4]} | #{@board.state[5]}  "
-    puts "---+---+---"
-    puts " #{@board.state[6]} | #{@board.state[7]} | #{@board.state[8]}  "
-    puts ""
-  end
-
 end
 
 class State
@@ -82,4 +72,23 @@ class State
     players = [ai_max, ai_min]
   end
 
+end
+
+# $0 represents name of file that is being run from terminal
+# From rspec, $0 would be something like rspec.rb
+
+if __FILE__ == $0
+  game = Tictactoe.new
+  board = Board.new
+  ai_max = Computer.new("x", Max.new)
+  ai_min = Computer.new("o", Min.new)
+  players = [ai_max, ai_min]
+  game.play_the_game board, players
+  board.print
+  winner = game.winner
+  if winner
+    puts "Winner: #{winner.name} as #{winner.mark}."
+  else
+    puts "No winner this time. Try again!"
+  end
 end
