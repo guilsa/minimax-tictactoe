@@ -1,19 +1,17 @@
 class Board
   attr_accessor :state
-  def initialize
-    @state = Array.new(9, " ")
+  EMPTY = " "
+
+  def initialize(state=nil)
+      @state = (state || Array.new(9, EMPTY))
   end
 
   def valid_position? position
-    @state[position] == " "
+    @state[position] == EMPTY
   end
 
   def get_available_positions
-    # "x" ===> |mark|
-    # ["x", 4] ===> |mark, index|
-    # [["x", 4], []] => |(mark, index), poses]
-    # somethings called splatting
-    @state.each.with_index.with_object([]) { |(mark, index), poses| poses << index if mark == " " }
+    @state.each.with_index.with_object([]) { |(mark, index), positions| positions << index if mark == EMPTY }
   end
 
   def print
@@ -26,5 +24,10 @@ class Board
     puts ""
   end
 
-
+  def get_new_state position, mark
+    new_state = @state.dup
+    new_state[position] = mark
+    board = self.class.new new_state
+    return board
+  end
 end
