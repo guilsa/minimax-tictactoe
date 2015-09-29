@@ -7,5 +7,5 @@ class Board
   def valid_position? position
     return @state[position] == " " ? true : false
   end
-
+  
 end

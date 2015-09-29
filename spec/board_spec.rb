@@ -15,7 +15,7 @@ describe "#valid_position" do
 end
 
 describe "#win?" do
-  it "should return true if player won" do
+  xit "should return true if player won" do
     # game = GameRunner.new
     # game.current_player.play(1)
     # game.current_player
