@@ -1,5 +1,17 @@
 require 'spec_helper'
 
+describe "Human#next_move" do
+  xit "should return a valid user input" do
+
+  end
+end
+
+describe "Min#next_move" do
+  xit "should return a valid move" do
+
+  end
+end
+
 describe '#play' do
 
   let(:board) { Board.new }

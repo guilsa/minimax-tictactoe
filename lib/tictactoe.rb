@@ -3,6 +3,7 @@ require_relative 'player'
 require 'pry'
 
 class Game
+  attr_accessor :board, :players
 
 # Instance variables get initialized here via dependency inversion
   def play_the_game board, players
@@ -26,6 +27,12 @@ class Game
     @players[0]
   end
 
+  def get_new_state(position)
+    game = self.class.new
+    game.board = game.board.get_new_state(posititon, player.mark)
+    game.players = @players.dup.rotate
+    game
+  end
 end
 
 class Tictactoe < Game
@@ -53,38 +60,17 @@ class Tictactoe < Game
 
 end
 
-class State
-
-  # Thinking that I need a method to override order of players.
-  # But Game already has #take_turns, it already does the overriding.
-  # So I need to inject game and access game.player
-  # Then do new_game_state take_turns if new_game_state.player !== game.player
-  # Thing is, everytime get_new_state is called.
-  # Shit, looks like my design/organization is wrong, it shouldn't be that complicated.
-
-
-  def get_new_state board_state, current_game
-    new_game = Game.new
-    new_board_state = Board.new
-    new_board_state = board_state
-    ai_max = Computer.new("x", Max.new)
-    ai_min = Computer.new("o", Min.new)
-    players = [ai_max, ai_min]
-  end
-
-end
-
 # $0 represents name of file that is being run from terminal
-# From rspec, $0 would be something like rspec.rb
+# For rspec, $0 would be something like rspec.rb
 
 if __FILE__ == $0
   game = Tictactoe.new
   board = Board.new
-  ai_max = Computer.new("x", Max.new)
-  ai_min = Computer.new("o", Min.new)
-  players = [ai_max, ai_min]
+  computer = Computer.new("X", Max.new)
+  human = Human.new("O")
+  players = [computer, human]
   game.play_the_game board, players
-  board.print
+  board.display
   winner = game.winner
   if winner
     puts "Winner: #{winner.name} as #{winner.mark}."

@@ -1,92 +1,101 @@
 require 'forwardable'
 
-# Why use inheritance when I should prefer composition?
-# No plan of having anything else as a base class. It's a learning experience.
-
-module Minmax
-
-  def score
-  end
-
-  # Should I pass the Board object or board_state (the array object)?
-  def minmax board, game
-    @board = board.state
-    @game = game
-    return score game_state if game.game_over?
-    scores = []
-    moves = []
-
-    get_available_positions do |position|
-      # Just play correctly, don't care who's turn it is from this perspective.
-      # Thing is, I designed Game to play from beginning to end in one call.
-      # Here it seems like we need to play once and save state so that we can play again later
-      # New requirement: There needs to be a Game method to allow for one play given Game state
-      possible_game = get_new_state(@board.state)
-      scores << minmax(possible_game, @game)
-    end
-
-  end
-
-end
-
-# Todo: switch this to composition
 module Player
-
   def play board, position
     @board = board
     @board.state[position] = @mark if @board.valid_position?(position)
   end
-
 end
 
-module TicTacToePlayer
+module TictactoePlayer
   attr_accessor :mark
 end
 
 class Human
+
   include Player
-  include TicTacToePlayer
+  include TictactoePlayer
 
   def initialize mark
     self.mark =  mark
   end
 
-  def next_move
+  def next_move board
+    puts "Your turn. Numbers represent locations:"
+    board.display
+    puts "Invalid input. Try again!" until valid_input? board
+    @user_input
   end
 
   def name
-    "Gil"
+    "Guil"
   end
+
+  private
+
+  def valid_input? board
+    @user_input = gets.chomp.to_i - 1
+    return false if @user_input == -1
+    board.valid_position? @user_input
+  end
+
 end
 
 class Computer
   extend Forwardable
   include Player
-  include TicTacToePlayer
+  include TictactoePlayer
 
   def initialize mark, game_strategy
     self.mark =  mark
     @game_strategy = game_strategy
   end
 
+  # Strategy pattern (Design Patterns in Ruby)
+  # with delegation + forwardable (http://brainspec.com/blog/2012/11/07/delegation-with-forwardable/)
   def_delegators :@game_strategy, :next_move, :name
+  # Above is the same as:
   # def next_move board
   #   @game_strategy.next_move board
   # end
-
+  # Also is the same as:
   # def next_move *args, &block
   #   @game_strategy.next_move(*args, &block)
   # end
-
 end
+
+# Not complete yet, ended up getting into a messy rabbit hole
+class Artificial
+  def next_move game
+    winner, move = next_move_rec game, game.player, nil
+  end
+
+  def next_move_rec game, player, move
+    return [move, game.winner] if game.game_over?
+    winners_by_move = []
+
+    game.board.get_available_positions do |next_move|
+      possible_game = game.get_new_state(next_move, player)
+      winners_by_move << ([move] + next_move(possible_game, player, next_move))
+    end
+
+    winners_by_move.each do |x|
+      return [x[0], player] if x[2] == player
+    end
+
+    winners_by_move.each do |x|
+      return [x[0], nil] if x[2].nil?
+    end
+
+    return [winners_by_move[0][0], (game.players - [player])[0]]
+  end
+end
+
 
 class Min
   def next_move board
-    # Player might not play because it'll only try once and move on to the next player.
-    # Bad way to mock the minmax behavior.
-    # Ultimately that was my object though. Mock it so I can understand it.
     play = board.get_available_positions.sample
-    puts "Min plays: #{play}"
+    puts "Min plays: #{play + 1}"
     play
   end
 
@@ -98,7 +107,7 @@ end
 class Max
   def next_move board
     play = board.get_available_positions.sample
-    puts "Max plays: #{play}"
+    puts "Max plays: #{play + 1}"
     play
   end
 
