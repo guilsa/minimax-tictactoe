@@ -66,11 +66,11 @@ end
 if __FILE__ == $0
   game = Tictactoe.new
   board = Board.new
-  ai_max = Computer.new("x", Max.new)
-  ai_min = Computer.new("o", Min.new)
-  players = [ai_max, ai_min]
+  computer = Computer.new("X", Max.new)
+  human = Human.new("O")
+  players = [computer, human]
   game.play_the_game board, players
-  board.print
+  board.display
   winner = game.winner
   if winner
     puts "Winner: #{winner.name} as #{winner.mark}."

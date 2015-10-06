@@ -12,6 +12,7 @@ module TictactoePlayer
 end
 
 class Human
+
   include Player
   include TictactoePlayer
 
@@ -19,12 +20,25 @@ class Human
     self.mark =  mark
   end
 
-  def next_move
+  def next_move board
+    puts "Your turn. Numbers represent locations:"
+    board.display
+    puts "Invalid input. Try again!" until valid_input? board
+    @user_input
   end
 
   def name
     "Guil"
   end
+
+  private
+
+  def valid_input? board
+    @user_input = gets.chomp.to_i - 1
+    return false if @user_input == -1
+    board.valid_position? @user_input
+  end
+
 end
 
 class Computer
@@ -81,7 +95,7 @@ end
 class Min
   def next_move board
     play = board.get_available_positions.sample
-    puts "Min plays: #{play}"
+    puts "Min plays: #{play + 1}"
     play
   end
 
@@ -93,7 +107,7 @@ end
 class Max
   def next_move board
     play = board.get_available_positions.sample
-    puts "Max plays: #{play}"
+    puts "Max plays: #{play + 1}"
     play
   end
 

@@ -25,11 +25,10 @@ describe "#start_the_game" do
   it "should start and end the game with a winner or a draw" do
     game = Tictactoe.new
     board = Board.new
-    ai_max = Computer.new("x", Max.new)
-    ai_min = Computer.new("o", Min.new)
+    ai_max = Computer.new("X", Max.new)
+    ai_min = Computer.new("O", Min.new)
     players = [ai_max, ai_min]
     game.play_the_game board, players
-    board.print
-    # expect(game.winner).to include("x", "o")
+    expect(game.winner.mark).to include("X", "O")
   end
 end
