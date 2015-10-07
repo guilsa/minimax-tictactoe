@@ -4,15 +4,19 @@ RSpec.configure do |c|
   c.include Helpers
 end
 
-describe "#start_the_game" do
-  xit "should start and end the game with a winner or a draw" do
-    game = Tictactoe.new
-    board = Board.new
-    ai_max = Computer.new("X", Max.new)
-    ai_min = Computer.new("O", Min.new)
-    players = [ai_max, ai_min]
-    game.play_the_game board, players
-    expect(game.winner.mark).to include("X", "O")
+describe "#play_the_game" do
+
+  before do
+    allow_message_expectations_on_nil
+    allow(@game).to receive(:winner).and_return(true)
+  end
+
+  it "should start and end the game with a winner or a draw" do
+
+    initialize_with_two_computers
+    play_until_winner
+    
+    expect(@game.winner.mark).to be_an(String)
   end
 end
 

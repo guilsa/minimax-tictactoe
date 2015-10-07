@@ -10,4 +10,11 @@ module Helpers
     @players = [@ai_max, @ai_min]
     @game = Tictactoe.new(@board, @players)
   end
+
+  def play_until_winner
+    until @game.winner != nil
+      initialize_with_two_computers
+      @game.play_the_game
+    end
+  end
 end
