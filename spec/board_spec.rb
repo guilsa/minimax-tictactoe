@@ -2,8 +2,12 @@ require 'spec_helper'
 
 describe "#valid_position?" do
   it "should know whether a position is empty or not" do
-    board = Board.new
-    expect(board.valid_position?(0)).to be(true)
+
+    initialize_with_two_computers
+
+    @board.state = ["X", "O", "O", "X", " ", "X", "X", "X", "O"]
+    expect(@board.valid_position?(4)).to be(true)
+    expect(@board.valid_position?(0)).to be(false)
   end
 end
 

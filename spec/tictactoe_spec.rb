@@ -1,9 +1,5 @@
 require 'spec_helper'
 
-RSpec.configure do |c|
-  c.include Helpers
-end
-
 describe "#play_the_game" do
 
   before do
@@ -15,7 +11,7 @@ describe "#play_the_game" do
 
     initialize_with_two_computers
     play_until_winner
-    
+
     expect(@game.winner.mark).to be_an(String)
   end
 end
@@ -59,26 +55,5 @@ end
 # end
 # describe "#player" do
 #   xit "should know the current player" do
-#   end
-# end
-
-# describe "#winner?" do
-#
-#   class DummyClass end
-#
-#   before(:all) do
-#     @dummy = DummyClass.new
-#     @dummy.extend Rules
-#   end
-#
-#   it "should return true given a winning board or false otherwise" do
-#
-#
-#     # board = Board.new
-#     # board.state = [" ", "o", "o", "x", "x", "x", "x", " ", " "]
-#     # ["x", " ", "x", "x", " ", "o", "x", " ", " "]
-#     # ["x", "x", " ", " ", "x", "o", "o", "o", "x"]
-#     # [" ", "x", "x", "o", "o", "o", " ", "x", " "]
-#     # board.winner
 #   end
 # end
