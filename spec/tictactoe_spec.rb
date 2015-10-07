@@ -48,15 +48,15 @@ describe "#draw?" do
   end
 end
 
-describe "#take_turns" do
-  xit "should should rotate players" do
-  end
-end
-
-describe "#player" do
-  xit "should know the current player" do
-  end
-end
+# Private methods don't have to be tested
+# describe "#take_turns" do
+#   it "should should rotate players" do
+#   end
+# end
+# describe "#player" do
+#   xit "should know the current player" do
+#   end
+# end
 
 # describe "#winner?" do
 #

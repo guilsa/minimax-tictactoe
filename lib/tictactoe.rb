@@ -21,21 +21,24 @@ class Game
     !!winner || draw?
   end
 
-  def take_turns players
-    @players.rotate!
-  end
-
-  def player
-    @players[0]
-  end
-
-  #To be deleted?
+  #To be deleted? Not sure yet
   def get_new_state(position)
     game = self.class.new
     game.board = game.board.get_new_state(posititon, player.mark)
     game.players = @players.dup.rotate
     game
   end
+
+  private
+
+  def player
+    @players[0]
+  end
+
+  def take_turns players
+    @players.rotate!
+  end
+
 end
 
 class Tictactoe < Game
