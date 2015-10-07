@@ -91,11 +91,10 @@ class Artificial
   end
 end
 
-
 class Min
   def next_move board
     play = board.get_available_positions.sample
-    puts "Min plays: #{play + 1}"
+    puts "Min plays: #{play + 1}" if __FILE__ == $0
     play
   end
 
@@ -107,7 +106,7 @@ end
 class Max
   def next_move board
     play = board.get_available_positions.sample
-    puts "Max plays: #{play + 1}"
+    puts "Max plays: #{play + 1}" if __FILE__ == $0
     play
   end
 
@@ -115,9 +114,3 @@ class Max
     "Maximillian"
   end
 end
-
-# IO Class for terminal/web input so that Human can next_move
-# class IO
-#   def next_move
-#   end
-# end

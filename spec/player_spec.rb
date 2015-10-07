@@ -17,8 +17,8 @@ describe '#play' do
   end
 end
 
-describe "Min#next_move" do
-  xit "should return a valid move" do
-
-  end
-end
+# describe "Min#next_move" do
+#   xit "should return a valid move" do
+#
+#   end
+# end
