@@ -4,7 +4,7 @@ Terminal-based Tic-Tac-Toe program in Ruby with emphasis on good OO design, TDD,
 
 # Learnings
 
-Writing an unbeatable computer - when having the computer decide it's next best move, I thought it'd be intuitive for the minmax algorithm to alternate between actual Min and Max players. This doesn't represent the actual model, it's just simpler for Computer to have an AI mixin.
+Writing an unbeatable computer - when having the computer decide it's next best move, I thought it'd be an intuitive design for the minmax algorithm to alternate between actual Min and Max players. This doesn't represent the actual model, it's just simpler for Computer to have an AI mixin.
 
 Although the requirements specified a computer should play a human, mocking out 2 computer players was in part helpful because it allowed for integrated/outside-in testing. I'm not certain how else I could have decoupled the dependency on user input for my tests.
 
