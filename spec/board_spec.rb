@@ -12,7 +12,12 @@ describe "#valid_position?" do
 end
 
 describe "#get_available_positions" do
-  xit "should know all available positions" do
+  it "should know all available positions" do
+
+    initialize_with_two_computers
+
+    @board.state = ["O", " ", " ", " ", "O", " ", "X", "X", "O"]
+    expect(@board.get_available_positions).to eq( [1,2,3,5] )
   end
 end
 
