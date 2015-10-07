@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "#valid_position?" do
-  xit "should know whether a position is empty or not" do
+  it "should know whether a position is empty or not" do
     board = Board.new
     expect(board.valid_position?(0)).to be(true)
   end

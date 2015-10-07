@@ -5,10 +5,12 @@ require 'pry'
 class Game
   attr_accessor :board, :players
 
-# Instance variables get initialized here via dependency inversion
-  def play_the_game board, players
+  def initialize board, players
     @board = board
     @players = players
+  end
+# Instance variables get initialized here via dependency inversion
+  def play_the_game
     until game_over?
       player.play board, player.next_move(@board)
       take_turns @players
@@ -42,6 +44,10 @@ class Tictactoe < Game
              [0, 1, 2], [3, 4, 5], [6, 7, 8],
              [0, 4, 8], [2, 4, 6]]
 
+  def initialize board, players
+    super board, players
+  end
+
   def winner
     saved_positions = []
     WIN_POS.each do |some|
@@ -65,12 +71,14 @@ end
 # For rspec, $0 would be something like rspec.rb
 
 if __FILE__ == $0
-  game = Tictactoe.new
   board = Board.new
   computer = Computer.new("X", Max.new)
   human = Human.new("O")
   players = [computer, human]
-  game.play_the_game board, players
+
+  game = Tictactoe.new(board, players)
+
+  game.play_the_game
   board.display
   winner = game.winner
   if winner
