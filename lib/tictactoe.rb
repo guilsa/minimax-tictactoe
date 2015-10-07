@@ -27,6 +27,7 @@ class Game
     @players[0]
   end
 
+  #To be deleted?
   def get_new_state(position)
     game = self.class.new
     game.board = game.board.get_new_state(posititon, player.mark)

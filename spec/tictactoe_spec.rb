@@ -22,7 +22,7 @@ require 'spec_helper'
 # end
 
 describe "#start_the_game" do
-  it "should start and end the game with a winner or a draw" do
+  xit "should start and end the game with a winner or a draw" do
     game = Tictactoe.new
     board = Board.new
     ai_max = Computer.new("X", Max.new)
@@ -30,5 +30,25 @@ describe "#start_the_game" do
     players = [ai_max, ai_min]
     game.play_the_game board, players
     expect(game.winner.mark).to include("X", "O")
+  end
+end
+
+describe "#winner" do
+  xit "should know who won or if there's currently no winner" do
+  end
+end
+
+describe "#draw?" do
+  xit "should know if the board is filled up" do
+  end
+end
+
+describe "#take_turns" do
+  xit "should should rotate players" do
+  end
+end
+
+describe "#player" do
+  xit "should know the current player" do
   end
 end
