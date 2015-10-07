@@ -10,6 +10,8 @@ Although the requirements specified a computer should play a human, mocking out 
 
 # How to run
 
+`bundle install`
+
 To run tests, including a winning game between two computer players:
 
 ```
