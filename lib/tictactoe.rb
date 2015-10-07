@@ -11,10 +11,10 @@ class Game
     @computer = @players[0]
     @human = @players[1]
   end
-# Instance variables get initialized here via dependency inversion
+
   def play_the_game
     until over?
-      player.play board, player.next_move(@board)
+      player.play(board, player.next_move(self))
       take_turns @players
     end
   end

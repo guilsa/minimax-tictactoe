@@ -20,10 +20,10 @@ class Human
     self.mark =  mark
   end
 
-  def next_move board
+  def next_move game
     puts "Your turn. Numbers represent locations:"
-    board.display
-    puts "Invalid input. Try again!" until valid_input? board
+    game.board.display
+    puts "Invalid input. Try again!" until valid_input? game.board
     @user_input
   end
 
@@ -64,13 +64,14 @@ class Computer
   # end
 end
 
-# Had no trouble testing this as a class
-# Now I need to change it to a module and am wondering how to "initialize" it.
 module AI
+
   def next_move game
-    a = minmax game, game.player
-    puts "Max plays: " if __FILE__ == $0
-    binding.pry
+    play = game.board.get_available_positions.sample
+    # a = minmax(game.board, game.player)
+    play
+
+    # puts "Max plays: " if __FILE__ == $0
   end
 
   def score game
@@ -102,24 +103,22 @@ module AI
 end
 
 class Min
-  def next_move board
-    play = board.get_available_positions.sample
-    puts "Min plays: #{play + 1}" if __FILE__ == $0
-    play
-  end
+  include AI
+  # def next_move game
+  #   play = game.board.get_available_positions.sample
+  #   puts "Min plays: #{play + 1}" if __FILE__ == $0
+  #   play
+  # end
 
   def name
     "Minual"
   end
 end
 
-# I know composition over inheritance
-# But I can unit test my AI class.
-# If it's a module, do I create an instance of x then extend module?
-
 class Max
-  # def next_move board
-  #   play = board.get_available_positions.sample
+  include AI
+  # def next_move game
+  #   play = game.board.get_available_positions.sample
   #   puts "Max plays: #{play + 1}" if __FILE__ == $0
   #   play
   # end
