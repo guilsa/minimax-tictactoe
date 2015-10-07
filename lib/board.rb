@@ -24,6 +24,28 @@ class Board
     puts ""
   end
 
+  # Trying to find a better way of writing #display.
+  # Not entirely happy yet.
+
+  # def display
+  #   center = [1,4,7]
+  #   pos = 0
+  #   puts ""
+  #   3.times do
+  #     3.times do
+  #       if center.include?(pos)
+  #         print "| #{pos} |"
+  #       else
+  #         print " #{pos} "
+  #       end
+  #       pos += 1
+  #     end
+  #     puts ""
+  #     puts "---+---+---" if pos < 8
+  #   end
+  #   puts ""
+  # end
+
   def get_new_state position, mark
     new_state = @state.dup
     new_state[position] = mark
