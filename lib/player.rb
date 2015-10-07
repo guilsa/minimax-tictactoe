@@ -64,10 +64,13 @@ class Computer
   # end
 end
 
-# Not complete yet, ended up getting into a messy rabbit hole
-class AI
+# Had no trouble testing this as a class
+# Now I need to change it to a module and am wondering how to "initialize" it.
+module AI
   def next_move game
-
+    a = minmax game, game.player
+    puts "Max plays: " if __FILE__ == $0
+    binding.pry
   end
 
   def score game
@@ -80,25 +83,22 @@ class AI
     end
   end
 
-  def minmax game, player, move
-    return [move, game.winner] if game.game_over?
-    winners_by_move = []
+  def minmax game, players, move=nil
+
+    cloned_players = players.dup
+    return score game if game.over?
+    scores = []
+    moves = []
 
     game.board.get_available_positions do |next_move|
-      possible_game = game.get_new_state(next_move, player)
-      winners_by_move << ([move] + next_move(possible_game, player, next_move))
+      possible_game = game.get_new_state(next_move, cloned_players[0])
+      cloned_players.rotate!
+      score << minmax(possible_game, cloned_players, next_move)
     end
 
-    winners_by_move.each do |x|
-      return [x[0], player] if x[2] == player
-    end
-
-    winners_by_move.each do |x|
-      return [x[0], nil] if x[2].nil?
-    end
-
-    return [winners_by_move[0][0], (game.players - [player])[0]]
+    binding.pry
   end
+
 end
 
 class Min
@@ -113,12 +113,16 @@ class Min
   end
 end
 
+# I know composition over inheritance
+# But I can unit test my AI class.
+# If it's a module, do I create an instance of x then extend module?
+
 class Max
-  def next_move board
-    play = board.get_available_positions.sample
-    puts "Max plays: #{play + 1}" if __FILE__ == $0
-    play
-  end
+  # def next_move board
+  #   play = board.get_available_positions.sample
+  #   puts "Max plays: #{play + 1}" if __FILE__ == $0
+  #   play
+  # end
 
   def name
     "Maximillian"

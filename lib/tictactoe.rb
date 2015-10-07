@@ -13,13 +13,13 @@ class Game
   end
 # Instance variables get initialized here via dependency inversion
   def play_the_game
-    until game_over?
+    until over?
       player.play board, player.next_move(@board)
       take_turns @players
     end
   end
 
-  def game_over?
+  def over?
     !!winner || draw?
   end
 

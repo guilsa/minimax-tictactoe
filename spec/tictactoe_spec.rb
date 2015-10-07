@@ -64,7 +64,6 @@ describe "#computer" do
   end
 end
 
-
 # Private methods don't have to be tested
 # describe "#take_turns" do
 #   it "should should rotate players" do
