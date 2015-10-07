@@ -65,12 +65,22 @@ class Computer
 end
 
 # Not complete yet, ended up getting into a messy rabbit hole
-class Artificial
+class AI
   def next_move game
-    winner, move = next_move_rec game, game.player, nil
+
   end
 
-  def next_move_rec game, player, move
+  def score game
+    if game.winner == game.computer
+      return 1
+    elsif game.winner == game.human
+      return -1
+    else
+      return 0
+    end
+  end
+
+  def minmax game, player, move
     return [move, game.winner] if game.game_over?
     winners_by_move = []
 

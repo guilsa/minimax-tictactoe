@@ -48,6 +48,23 @@ describe "#draw?" do
   end
 end
 
+describe "#human" do
+  it "should know which player is human" do
+    initialize_human_vs_computer
+    @players.rotate!
+    expect(@game.human.class).to be(Human)
+  end
+end
+
+describe "#computer" do
+  it "should know which player is the computer" do
+    initialize_human_vs_computer
+    @players.rotate!
+    expect(@game.computer.class).to be(Computer)
+  end
+end
+
+
 # Private methods don't have to be tested
 # describe "#take_turns" do
 #   it "should should rotate players" do

@@ -3,11 +3,13 @@ require_relative 'player'
 require 'pry'
 
 class Game
-  attr_accessor :board, :players
+  attr_accessor :board, :players, :human, :computer
 
   def initialize board, players
     @board = board
     @players = players
+    @computer = @players[0]
+    @human = @players[1]
   end
 # Instance variables get initialized here via dependency inversion
   def play_the_game
@@ -31,6 +33,14 @@ class Game
 
   def player
     @players[0]
+  end
+
+  def human
+    @players.select { |player| player.is_a?(Human)}[0]
+  end
+
+  def computer
+    @players.select { |player| player.is_a?(Computer)}[0]
   end
 
   private

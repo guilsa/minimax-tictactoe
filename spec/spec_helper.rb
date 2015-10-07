@@ -11,6 +11,14 @@ module Helpers
     @game = Tictactoe.new(@board, @players)
   end
 
+  def initialize_human_vs_computer
+    @board = Board.new
+    @computer = Computer.new("X", Max.new)
+    @human = Human.new("O")
+    @players = [@computer, @human]
+    @game = Tictactoe.new(@board, @players)
+  end
+
   def play_until_winner
     until @game.winner != nil
       initialize_with_two_computers
