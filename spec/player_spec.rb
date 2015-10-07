@@ -17,12 +17,6 @@ describe '#play' do
   end
 end
 
-describe "Human#next_move" do
-  xit "should return a valid user input" do
-
-  end
-end
-
 describe "Min#next_move" do
   xit "should return a valid move" do
 
