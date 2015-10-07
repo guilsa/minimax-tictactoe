@@ -29,10 +29,3 @@ describe "#get_new_state" do
     @board.state = ["O", " ", " ", " ", "O", " ", "X", "X", "O"]
   end
 end
-
-# describe "make_board_state" do
-#   let(:board) { Board.new }
-#   xit "should return an array representing new board state given a play position" do
-#     board.make_board_state(5)
-#   end
-# end
