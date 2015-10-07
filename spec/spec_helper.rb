@@ -3,7 +3,7 @@ require_relative '../lib/player.rb'
 require_relative '../lib/tictactoe.rb'
 
 module Helpers
-  def set_game_up
+  def initialize_with_two_computers
     @board = Board.new
     @ai_max = Computer.new("X", Max.new)
     @ai_min = Computer.new("O", Min.new)

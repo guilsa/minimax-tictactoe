@@ -20,7 +20,7 @@ describe "#winner" do
 
   it "should know who won or if there's currently no winner" do
 
-    set_game_up
+    initialize_with_two_computers
 
     @board.state = [" ", "O", "O", "X", "X", "X", "X", " ", " "]
     expect(@game.winner).to eq(@ai_max)
@@ -35,7 +35,16 @@ describe "#winner" do
 end
 
 describe "#draw?" do
-  xit "should know if the board is filled up" do
+  it "should know if the board is filled up" do
+
+    initialize_with_two_computers
+
+    @board.state = ["X", "O", "O", "X", "O", "X", "X", "X", "O"]
+    expect(@game.draw?).to be(true)
+
+    @board.state = [" ", "O", "O", "X", "O", "X", "X", "X", "O"]
+    expect(@game.draw?).to be(false)
+
   end
 end
 
