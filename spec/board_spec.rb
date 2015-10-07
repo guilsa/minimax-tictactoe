@@ -22,7 +22,11 @@ describe "#get_available_positions" do
 end
 
 describe "#get_new_state" do
-  xit "should return the next board state given a position to play" do
+  it "should return the next board state given a position to play" do
+
+    initialize_with_two_computers
+
+    @board.state = ["O", " ", " ", " ", "O", " ", "X", "X", "O"]
   end
 end
 

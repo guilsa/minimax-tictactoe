@@ -29,11 +29,11 @@ class Game
     game
   end
 
-  private
-
   def player
     @players[0]
   end
+
+  private
 
   def take_turns players
     @players.rotate!
