@@ -38,8 +38,7 @@ describe "#draw?" do
   it "should know if the board is filled up" do
 
     initialize_with_two_computers
-
-    @board.state = ["X", "O", "O", "X", "O", "X", "X", "X", "O"]
+    @board.state = ["X", "O", "O", "X", "O", "X", "X", "O", "O"]
     expect(@game.draw?).to be(true)
 
     @board.state = [" ", "O", "O", "X", "O", "X", "X", "X", "O"]
@@ -61,6 +60,14 @@ describe "#computer" do
     initialize_human_vs_computer
     @players.rotate!
     expect(@game.computer.class).to be(Computer)
+  end
+end
+
+describe "#get_new_game" do
+  it "should return a new game with next board state given a position" do
+    initialize_with_two_computers
+    @board.state = ["O", " ", " ", " ", " ", " ", "X", "X", "O"]
+    expect(@game.get_new_game(1).board.state).to eq(["O", "X", " ", " ", " ", " ", "X", "X", "O"])
   end
 end
 

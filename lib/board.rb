@@ -14,6 +14,13 @@ class Board
     @state.each.with_index.with_object([]) { |(mark, index), positions| positions << index if mark == EMPTY }
   end
 
+  def get_new_state position, mark
+    new_state = @state.dup
+    new_state[position] = mark
+    board = self.class.new new_state
+    return board
+  end
+
   def display
     puts ""
     puts " #{state[0] == EMPTY ? "1" : state[0]} | #{state[1] == EMPTY ? "2" : state[1]} | #{state[2] == EMPTY ? "3" : state[2]}  "
@@ -64,12 +71,5 @@ class Board
   #   end
   #   puts ""
   # end
-
-  def get_new_state position, mark
-    new_state = @state.dup
-    new_state[position] = mark
-    board = self.class.new new_state
-    return board
-  end
 
 end

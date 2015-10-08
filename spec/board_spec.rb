@@ -25,7 +25,7 @@ describe "#get_new_state" do
   it "should return the next board state given a position to play" do
 
     initialize_with_two_computers
-
     @board.state = ["O", " ", " ", " ", "O", " ", "X", "X", "O"]
+    expect(@board.get_new_state(1, "X").state).to eq(["O", "X", " ", " ", "O", " ", "X", "X", "O"])
   end
 end

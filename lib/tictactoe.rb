@@ -10,8 +10,6 @@ class Game
   def initialize board, players
     @board = board
     @players = players
-    @computer = @players[0]
-    @human = @players[1]
   end
 
   def play_the_game
@@ -25,11 +23,12 @@ class Game
     !!winner || draw?
   end
 
-  #To be deleted? Not sure yet
-  def get_new_state(position)
-    game = self.class.new
-    game.board = game.board.get_new_state(posititon, player.mark)
-    game.players = @players.dup.rotate
+  def get_new_game(position)
+    board = @board.dup
+    players = @players.dup
+    game = self.class.new(board, players)
+    game.board = game.board.get_new_state(position, game.player.mark)
+    players.rotate!
     game
   end
 
