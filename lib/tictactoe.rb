@@ -1,5 +1,7 @@
-require_relative 'board'
-require_relative 'player'
+# Require all files in the lib folder
+Dir[File.dirname(__FILE__) + '/*.rb'].each do |file|
+  require_relative File.basename(file, File.extname(file))
+end
 require 'pry'
 
 class Game
