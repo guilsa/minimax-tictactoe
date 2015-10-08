@@ -27,6 +27,25 @@ class Board
   # Trying to find a better way of writing #display.
   # Not entirely happy yet.
 
+  # OPTION 1
+  # def display
+  #   print_line( [0,1,2] ) { |pos| print "| #{mark pos} |" }
+  #   print_line( [3,4,5] ) { |pos| print "| #{mark pos} |" }
+  #   print_line( [6,7,8] ) { |pos| print "| #{mark pos} |" }
+  # end
+  #
+  # private
+  #
+  # def print_line index
+  #   index.each {|item| yield(item)}
+  #   puts ""
+  # end
+  #
+  # def mark index
+  #   state[index] == EMPTY ? (index + 1).to_s : state[index]
+  # end
+
+  # OPTION 2
   # def display
   #   center = [1,4,7]
   #   pos = 0

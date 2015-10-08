@@ -68,9 +68,8 @@ module AI
 
   def next_move game
     play = game.board.get_available_positions.sample
-    # a = minmax(game.board, game.player)
+    a = minmax(game, game.player)
     play
-
     # puts "Max plays: " if __FILE__ == $0
   end
 
@@ -90,14 +89,12 @@ module AI
     return score game if game.over?
     scores = []
     moves = []
-
     game.board.get_available_positions do |next_move|
       possible_game = game.get_new_state(next_move, cloned_players[0])
       cloned_players.rotate!
       score << minmax(possible_game, cloned_players, next_move)
+      binding.pry
     end
-
-    binding.pry
   end
 
 end
