@@ -23,7 +23,7 @@ class HumanPlayer
 
 private
   def input_position board
-    user_input = STDIN.gets.chomp.to_i - 1
+    user_input = STDIN.gets.chomp.to_i
     board.valid_position?(user_input) ? user_input : nil
   end
 end

@@ -10,7 +10,7 @@ class Game
     until over?
       move = current_player.next_move(self)
       current_player.play @board, move
-      puts "#{current_player} played at position #{move + 1}"
+      puts "#{current_player} played at position #{move}"
       next_player
     end
   end

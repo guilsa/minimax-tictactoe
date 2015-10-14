@@ -1,37 +1,38 @@
 class Board
   attr_accessor :state
 
-  def initialize(state=nil)
-      @state = (state || Array.new(9))
+  def initialize state=nil
+    @state = (state || Array.new(9))
   end
 
   def valid_position? position
-    @state[position].nil?
+    self[position].nil?
   end
 
   def get_available_positions
-    @state.each.with_index.select { |mark, index| mark.nil? }.map { |mark, index| index }
+    @state.each.with_index(1).select { |mark, index| mark.nil? }.map { |mark, index| index }
   end
 
-  def get_new_state position, mark
-    new_state = @state.dup
-    new_state[position] = mark
-    board = self.class.new new_state
-    return board
+  def new_board position, mark
+    board = self.class.new @state.dup
+    board[position] = mark
+    board
   end
 
-  def [](position)
-    @state[position]
+  def [] position
+    raise IndexError, "Bad position: #{position}" unless position.between?(1, 9)
+    @state[position - 1]
   end
 
-  def []=(position, mark)
-    @state[position] = mark
+  def []= position, mark
+    raise ArgumentError, "Position already taken: #{position}" unless valid_position? position
+    @state[position - 1] = mark
   end
 
   def display
     puts
-    0.upto 8 do |pos|
-      value = @state[pos] || (pos + 1)
+    @state.each.with_index do |value, pos|
+      value ||= (pos + 1)
       if pos % 3 == 1
         print "| #{value} |"
       else

@@ -7,10 +7,15 @@ require_relative 'computer_player'
 
 ################################################
 class Tictactoe < Game
+  # Grid is:
+  # 1 2 3
+  # 4 5 6
+  # 7 8 9
+
   WINNING_LINES = [
-    [0, 3, 6], [1, 4, 7], [2, 5, 8], # Vertical lines
-    [0, 1, 2], [3, 4, 5], [6, 7, 8], # Horizontal lines
-    [0, 4, 8], [2, 4, 6] # Diagonals.
+    [1, 4, 7], [2, 5, 8], [3, 5, 9], # Vertical lines
+    [1, 2, 3], [4, 5, 6], [7, 8, 9], # Horizontal lines
+    [1, 5, 9], [3, 5, 7] # Diagonals.
   ]
 
   def initialize players, board=nil
@@ -22,7 +27,7 @@ class Tictactoe < Game
     saved_positions = []
     WINNING_LINES.each do |winning_line|
       @players.each do |player|
-        return player if winning_line.all? { |position| @board.state[position] == player.mark }
+        return player if winning_line.all? { |position| @board[position] == player.mark }
       end
       saved_positions.clear
     end
@@ -34,8 +39,8 @@ class Tictactoe < Game
     !@board.state.include?(nil)
   end
 
-  def get_new_game(position)
-    board = @board.get_new_state(position, current_player.mark)
+  def new_game position
+    board = @board.new_board position, current_player.mark
     self.class.new @players.rotate, board
   end
 end

@@ -14,7 +14,7 @@ private
     scores = []
 
     game.board.get_available_positions.each do |move|
-      possible_game = game.get_new_game(move)
+      possible_game = game.new_game(move)
       score = min_max(possible_game)[0]
       scores << [score, move]
     end

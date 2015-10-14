@@ -42,10 +42,10 @@ describe Tictactoe do
     end
   end
 
-  describe "#get_new_game" do
+  describe "#new_game" do
     it "should return a new game with next board state given a position" do
       @game.board.state = ["O", nil, nil, nil, nil, nil, "X", "X", "O"]
-      expect(@game.get_new_game(1).board.state).to eq ["O", "X", nil, nil, nil, nil, "X", "X", "O"]
+      expect(@game.new_game(2).board.state).to eq ["O", "X", nil, nil, nil, nil, "X", "X", "O"]
     end
   end
 end
