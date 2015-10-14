@@ -31,8 +31,13 @@ describe Tictactoe do
   end
 
   describe "#draw?" do
-    it "should know if the board is filled up" do
+    it "should know if the board is filled up, with a winner" do
       @game.board.state = ["X", "O", "O", "X", "O", "X", "X", "O", "O"]
+      expect(@game.draw?).to be false
+    end
+
+    it "should know if the board is filled up, without a winner" do
+      @game.board.state = ["X", "O", "O", "X", "O", "X", "O", "X", "O"]
       expect(@game.draw?).to be true
     end
 

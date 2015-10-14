@@ -1,6 +1,6 @@
 require 'pry'
 
-require_relative 'tictactoe_board'
+require_relative 'board'
 require_relative 'game'
 require_relative 'human_player'
 require_relative 'computer_player'
@@ -24,19 +24,17 @@ class Tictactoe < Game
   end
 
   def winner
-    saved_positions = []
     WINNING_LINES.each do |winning_line|
       @players.each do |player|
         return player if winning_line.all? { |position| @board[position] == player.mark }
       end
-      saved_positions.clear
     end
 
     nil
   end
 
   def draw?
-    !@board.state.include?(nil)
+    @board.full? && winner.nil?
   end
 
   def new_game position

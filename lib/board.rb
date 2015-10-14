@@ -29,6 +29,10 @@ class Board
     @state[position - 1] = mark
   end
 
+  def full?
+    !@state.include?(nil)
+  end
+
   def display
     puts
     @state.each.with_index do |value, pos|
