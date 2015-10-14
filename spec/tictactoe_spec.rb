@@ -15,41 +15,55 @@ describe Tictactoe do
 
   describe "#winner" do
     it "should know there's currently no winner" do
-      @game.board.state = [nil, "O", "O", "X", nil, "X", "X", nil, nil]
+      @game.board.state = [nil, "O", "O",
+                           "X", nil, "X",
+                           "X", nil, nil]
       expect(@game.winner).to be nil
     end
 
     it "should know if X has won" do
-      @game.board.state = [nil, "O", "O", "X", "X", "X", "X", nil, nil]
+      @game.board.state = [nil, "O", "O",
+                           "X", "X", "X",
+                           "X", nil, nil]
       expect(@game.winner).to eq @ai_x
     end
 
     it "should know if O has won" do
-      @game.board.state = ["O", "O", "O", nil, "O", nil, "X", "X", "O"]
+      @game.board.state = ["O", "O", "O",
+                           nil, "O", nil,
+                           "X", "X", "O"]
       expect(@game.winner).to eq @ai_o
     end
   end
 
   describe "#draw?" do
     it "should know if the board is filled up, with a winner" do
-      @game.board.state = ["X", "O", "O", "X", "O", "X", "X", "O", "O"]
+      @game.board.state = ["X", "O", "O",
+                           "X", "O", "X",
+                           "X", "O", "O"]
       expect(@game.draw?).to be false
     end
 
     it "should know if the board is filled up, without a winner" do
-      @game.board.state = ["X", "O", "O", "X", "O", "X", "O", "X", "O"]
+      @game.board.state = ["X", "O", "O",
+                           "O", "O", "X",
+                           "X", "X", "O"]
       expect(@game.draw?).to be true
     end
 
     it "should know if the board is not filled up" do
-      @game.board.state = [nil, "O", "O", "X", "O", "X", "X", "X", "O"]
+      @game.board.state = [nil, "O", "O",
+                           "X", "O", "X",
+                           "X", "X", "O"]
       expect(@game.draw?).to be false
     end
   end
 
   describe "#new_game" do
     it "should return a new game with next board state given a position" do
-      @game.board.state = ["O", nil, nil, nil, nil, nil, "X", "X", "O"]
+      @game.board.state = ["O", nil, nil,
+                           nil, nil, nil,
+                           "X", "X", "O"]
       expect(@game.new_game(2).board.state).to eq ["O", "X", nil, nil, nil, nil, "X", "X", "O"]
     end
   end

@@ -8,7 +8,6 @@ human = HumanPlayer.new("O")
 game = Tictactoe.new [computer, human]
 
 game.play_the_game
-game.board.display
 winner = game.winner
 
 if winner.nil?

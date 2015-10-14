@@ -13,7 +13,7 @@ class Tictactoe < Game
   # 7 8 9
 
   WINNING_LINES = [
-    [1, 4, 7], [2, 5, 8], [3, 5, 9], # Vertical lines
+    [1, 4, 7], [2, 5, 8], [3, 6, 9], # Vertical lines
     [1, 2, 3], [4, 5, 6], [7, 8, 9], # Horizontal lines
     [1, 5, 9], [3, 5, 7] # Diagonals.
   ]
