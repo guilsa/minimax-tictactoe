@@ -2,7 +2,7 @@
 
 require_relative "../lib/tictactoe"
 
-computer = ComputerPlayer.new("X", :random)
+computer = ComputerPlayer.new("X", ARGV[0] == "min_max" ? :min_max : :random)
 human = HumanPlayer.new("O")
 
 game = Tictactoe.new [computer, human]
