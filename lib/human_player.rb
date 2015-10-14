@@ -12,8 +12,7 @@ class HumanPlayer
       if position.nil?
         puts "Invalid input. Try again!"
       else
-        play game.board, position
-        break
+        return position
       end
     end
   end
