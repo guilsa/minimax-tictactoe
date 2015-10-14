@@ -39,22 +39,3 @@ class Tictactoe < Game
     self.class.new @players.rotate, board
   end
 end
-
-# $0 represents name of file that is being run from terminal
-# For rspec, $0 would be something like rspec.rb
-if __FILE__ == $0
-  computer = ComputerPlayer.new("X", :random)
-  human = HumanPlayer.new("O")
-  players = [computer, human]
-
-  game = Tictactoe.new(players)
-
-  game.play_the_game
-  board.display
-  winner = game.winner
-  if winner
-    puts "Winner: #{winner.name} as #{winner.mark}."
-  else
-    puts "No winner this time. Try again!"
-  end
-end

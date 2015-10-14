@@ -8,7 +8,7 @@ module Player
   def play board, position
     raise "Bad position - already played: #{position + 1}" unless board.valid_position?(position)
 
-    board.state[position] = @mark
+    board[position] = @mark
   end
 
   def to_s
