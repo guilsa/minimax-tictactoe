@@ -15,7 +15,7 @@ class ComputerPlayer
                      when :random then Random.new
                      when :min_max then MinMax.new
                      else
-                       raise ArgumentError, "Bad strategy: %s" % game_strategy
+                       raise ArgumentError, "Bad strategy: #{game_strategy.inspect}"
                      end
   end
 
