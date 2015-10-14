@@ -8,7 +8,9 @@ class Game
 
   def play_the_game
     until over?
-      current_player.play @board, current_player.next_move(self)
+      move = current_player.next_move(self)
+      current_player.play @board, move
+      puts "#{current_player} played at position #{move + 1}"
       next_player
     end
   end

@@ -1,17 +1,7 @@
 class MinMax
-  def score game
-    if game.winner.nil?
-      0
-    elsif game.winner.mark == "X"
-      +1
-    elsif game.winner.mark == "O"
-      -1
-    end
-  end
-
   def next_move game
-    min_max game
-    @choice
+    _, move = min_max game
+    move
   end
 
   def name
@@ -20,27 +10,31 @@ class MinMax
 
 private
   def min_max game
-    return score game if game.over?
+    return [score(game), nil] if game.over?
 
     scores = []
-    moves = []
 
     game.board.get_available_positions.each do |move|
       possible_game = game.get_new_game(move)
-      scores << min_max(possible_game)
-      moves << move
+      score, the_move = min_max(possible_game)
+      the_move = move if the_move.nil?
+      scores << [score, the_move]
     end
 
     if game.current_player.mark == "X"
-      # This is the max calculation
-      max_score_index = scores.each_with_index.max[1]
-      @choice = moves[max_score_index]
-      return scores[max_score_index]
+      scores.max
     else
-      # This is the min calculation
-      min_score_index = scores.each_with_index.min[1]
-      @choice = moves[min_score_index]
-      return scores[min_score_index]
+      scores.min
+    end
+  end
+
+  def score game
+    if game.winner.nil?
+      0
+    elsif game.winner.mark == "X"
+      +1
+    elsif game.winner.mark == "O"
+      -1
     end
   end
 end
