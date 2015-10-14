@@ -8,6 +8,7 @@ describe Tictactoe do
   describe "#play_the_game" do
     it "should end the game with a winner or a draw" do
       play_until_winner
+      expect(@game.over?)
       expect([@ai_x, @ai_o, nil]).to include @game.winner
     end
   end

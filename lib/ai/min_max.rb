@@ -1,7 +1,6 @@
 class MinMax
   def next_move game
-    _, move = min_max game
-    move
+    min_max(game)[1]
   end
 
   def name
@@ -16,9 +15,8 @@ private
 
     game.board.get_available_positions.each do |move|
       possible_game = game.get_new_game(move)
-      score, the_move = min_max(possible_game)
-      the_move = move if the_move.nil?
-      scores << [score, the_move]
+      score = min_max(possible_game)[0]
+      scores << [score, move]
     end
 
     if game.current_player.mark == "X"

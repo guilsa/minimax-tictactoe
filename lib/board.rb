@@ -20,6 +20,14 @@ class Board
     return board
   end
 
+  def [](position)
+    @state[position]
+  end
+
+  def []=(position, mark)
+    @state[position] = mark
+  end
+
   def display
     puts
     0.upto 8 do |pos|

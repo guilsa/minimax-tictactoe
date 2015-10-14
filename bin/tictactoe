@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/tictactoe"
+
+computer = ComputerPlayer.new("X", :random)
+human = HumanPlayer.new("O")
+
+game = Tictactoe.new [computer, human]
+
+game.play_the_game
+game.board.display
+winner = game.winner
+
+if winner.nil?
+  puts "No winner this time. Try again!"
+else
+  puts "Winner: #{winner.name} as #{winner.mark}."
+end

@@ -7,13 +7,13 @@ class HumanPlayer
     puts "Your turn (you are #{mark}). Numbers represent locations:"
     game.board.display
 
-    position = nil
-    while position.nil?
+    loop do
       position = input_position game.board
       if position.nil?
         puts "Invalid input. Try again!"
       else
-        play board, position
+        play game.board, position
+        break
       end
     end
   end
@@ -22,10 +22,9 @@ class HumanPlayer
     "You"
   end
 
-  private
-
+private
   def input_position board
-    user_input = gets.chomp.to_i
+    user_input = STDIN.gets.chomp.to_i - 1
     board.valid_position?(user_input) ? user_input : nil
   end
 end
