@@ -3,9 +3,9 @@ require_relative '../lib/tictactoe.rb'
 
 module Helpers
   def initialize_with_two_computers
-    @ai_X = ComputerPlayer.new("X", :min_max)
-    @ai_O = ComputerPlayer.new("O", :min_max)
-    @game = Tictactoe.new [@ai_X, @ai_O]
+    @ai_x = ComputerPlayer.new("X", :min_max)
+    @ai_o = ComputerPlayer.new("O", :random)
+    @game = Tictactoe.new [@ai_x, @ai_o]
   end
 
   def initialize_human_vs_computer

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Board do
-  let(:board) { Board.new }
+  let(:board) { described_class.new }
 
   describe "#valid_position?" do
     it "should know whether a position is empty or not" do

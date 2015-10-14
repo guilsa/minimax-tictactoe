@@ -8,7 +8,7 @@ describe Tictactoe do
   describe "#play_the_game" do
     it "should end the game with a winner or a draw" do
       play_until_winner
-      expect([@ai_X, @ai_O, nil]).to include @game.winner
+      expect([@ai_x, @ai_o, nil]).to include @game.winner
     end
   end
 
@@ -20,12 +20,12 @@ describe Tictactoe do
 
     it "should know if X has won" do
       @game.board.state = [nil, "O", "O", "X", "X", "X", "X", nil, nil]
-      expect(@game.winner).to eq @ai_X
+      expect(@game.winner).to eq @ai_x
     end
 
     it "should know if O has won" do
       @game.board.state = ["O", "O", "O", nil, "O", nil, "X", "X", "O"]
-      expect(@game.winner).to eq @ai_O
+      expect(@game.winner).to eq @ai_o
     end
   end
 
@@ -48,13 +48,3 @@ describe Tictactoe do
     end
   end
 end
-
-# Private methods don't have to be tested
-# describe "#take_turns" do
-#   it "should should rotate players" do
-#   end
-# end
-# describe "#player" do
-#   xit "should know the current player" do
-#   end
-# end
