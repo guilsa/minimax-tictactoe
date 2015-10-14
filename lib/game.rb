@@ -11,6 +11,7 @@ class Game
       move = current_player.next_move(self)
       current_player.play @board, move
       puts "#{current_player} played at position #{move}"
+      @board.display
       next_player
     end
   end
