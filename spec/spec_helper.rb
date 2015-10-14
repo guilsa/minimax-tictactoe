@@ -1,27 +1,21 @@
-require_relative '../lib/board.rb'
-require_relative '../lib/player.rb'
 require_relative '../lib/tictactoe.rb'
 
 
 module Helpers
   def initialize_with_two_computers
-    @board = Board.new
-    @ai_max = Computer.new("X", Max.new)
-    @ai_min = Computer.new("O", Min.new)
-    @players = [@ai_max, @ai_min]
-    @game = Tictactoe.new(@board, @players)
+    @ai_X = ComputerPlayer.new("X", :min_max)
+    @ai_O = ComputerPlayer.new("O", :min_max)
+    @game = Tictactoe.new [@ai_X, @ai_O]
   end
 
   def initialize_human_vs_computer
-    @board = Board.new
-    @computer = Computer.new("X", Max.new)
-    @human = Human.new("O")
-    @players = [@computer, @human]
-    @game = Tictactoe.new(@board, @players)
+    @computer = ComputerPlayer.new("X", :min_max)
+    @human = HumanPlayer.new("O")
+    @game = Tictactoe.new [@computer, @human]
   end
 
   def play_until_winner
-    until @game.winner != nil
+    while @game.winner.nil?
       initialize_with_two_computers
       @game.play_the_game
     end

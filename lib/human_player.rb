@@ -1,30 +1,31 @@
 require_relative 'player'
 
-class Human
-
+class HumanPlayer
   include Player
 
-  def initialize mark
-    self.mark =  mark
-  end
-
   def next_move game
-    puts "Your turn. Numbers represent locations:"
+    puts "Your turn (you are #{mark}). Numbers represent locations:"
     game.board.display
-    puts "Invalid input. Try again!" until valid_input? game.board
-    @user_input
+
+    position = nil
+    while position.nil?
+      position = input_position game.board
+      if position.nil?
+        puts "Invalid input. Try again!"
+      else
+        play board, position
+      end
+    end
   end
 
   def name
-    "Guil"
+    "You"
   end
 
   private
 
-  def valid_input? board
-    @user_input = gets.chomp.to_i - 1
-    return false if @user_input == -1
-    board.valid_position? @user_input
+  def input_position board
+    user_input = gets.chomp.to_i
+    board.valid_position?(user_input) ? user_input : nil
   end
-
 end

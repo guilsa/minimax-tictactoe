@@ -1,9 +1,14 @@
-require 'forwardable'
-
 module Player
-  attr_accessor :mark
+  attr_reader :mark
+
+  def initialize mark
+    @mark =  mark
+  end
+
   def play board, position
-    @board = board
-    @board.state[position] = @mark if @board.valid_position?(position)
+    raise "Bad position - already played: #{position + 1}" unless board.valid_position?(position)
+
+    board.state[position] = @mark
+    puts "#{name} played #{mark} at position #{position + 1}"
   end
 end

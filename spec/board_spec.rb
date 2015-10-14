@@ -1,31 +1,27 @@
 require 'spec_helper'
 
-describe "#valid_position?" do
-  it "should know whether a position is empty or not" do
+describe Board do
+  let(:board) { Board.new }
 
-    initialize_with_two_computers
-
-    @board.state = ["X", "O", "O", "X", " ", "X", "X", "X", "O"]
-    expect(@board.valid_position?(4)).to be(true)
-    expect(@board.valid_position?(0)).to be(false)
+  describe "#valid_position?" do
+    it "should know whether a position is empty or not" do
+      board.state = ["X", "O", "O", "X", nil, "X", "X", "X", "O"]
+      expect(board.valid_position?(4)).to be true
+      expect(board.valid_position?(0)).to be false
+    end
   end
-end
 
-describe "#get_available_positions" do
-  it "should know all available positions" do
-
-    initialize_with_two_computers
-
-    @board.state = ["O", " ", " ", " ", "O", " ", "X", "X", "O"]
-    expect(@board.get_available_positions).to eq( [1,2,3,5] )
+  describe "#get_available_positions" do
+    it "should know all available positions" do
+      board.state = ["O", nil, nil, nil, "O", nil, "X", "X", "O"]
+      expect(board.get_available_positions).to eq [1, 2, 3, 5]
+    end
   end
-end
 
-describe "#get_new_state" do
-  it "should return the next board state given a position to play" do
-
-    initialize_with_two_computers
-    @board.state = ["O", " ", " ", " ", "O", " ", "X", "X", "O"]
-    expect(@board.get_new_state(1, "X").state).to eq(["O", "X", " ", " ", "O", " ", "X", "X", "O"])
+  describe "#get_new_state" do
+    it "should return the next board state given a position to play" do
+      board.state = ["O", nil, nil, nil, "O", nil, "X", "X", "O"]
+      expect(board.get_new_state(1, "X").state).to eq ["O", "X", nil, nil, "O", nil, "X", "X", "O"]
+    end
   end
 end
