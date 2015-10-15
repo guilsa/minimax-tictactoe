@@ -4,14 +4,14 @@ require_relative "../lib/tictactoe"
 
 computer = ComputerPlayer.new("X", ARGV[0] == "min_max" ? :min_max : :random)
 human = HumanPlayer.new("O")
-
-game = Tictactoe.new [computer, human]
+game = Tictactoe.new [computer, human], :terminal
 
 game.play_the_game
 winner = game.winner
 
 if winner.nil?
-  puts "No winner this time. Try again!"
+  # puts "No winner this time. Try again!"
+  game.display.notice "No winner this time. Try again!"
 else
-  puts "Winner: #{winner.name} as #{winner.mark}."
+  game.display.winner winner
 end

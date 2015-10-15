@@ -4,13 +4,15 @@ class HumanPlayer
   include Player
 
   def next_move game
-    puts "Your turn (you are #{mark}). Numbers represent locations:"
+    # puts "Your turn (you are #{mark}). Numbers represent locations:"
+    game.display.your_turn mark
+
     game.board.display
 
     loop do
       position = input_position game.board
       if position.nil?
-        puts "Invalid input. Try again!"
+        game.display.notice "Invalid input. Try again!"
       else
         return position
       end

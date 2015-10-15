@@ -4,6 +4,7 @@ require_relative 'board'
 require_relative 'game'
 require_relative 'human_player'
 require_relative 'computer_player'
+require_relative 'display'
 
 ################################################
 class Tictactoe < Game
@@ -18,9 +19,9 @@ class Tictactoe < Game
     [1, 5, 9], [3, 5, 7] # Diagonals.
   ]
 
-  def initialize players, board=nil
+  def initialize players, board=nil, display
     board ||= Board.new
-    super board, players
+    super board, players, display
   end
 
   def winner
