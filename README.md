@@ -1,6 +1,8 @@
 # Tictactoe
 
-Terminal-based Tic-Tac-Toe program in Ruby with emphasis on good OO design, TDD, and minmax algorithm. Minmax allows the computer to play as a perfect player and never loose. So the best a human can do is get a draw from it.
+Terminal-based tic-tac-tie program in Ruby with emphasis on good OO design, TDD, and minmax algorithm. Minmax allows the computer to play as a perfect player and never loose. So the best a human can do is get a draw from it.
+
+On this project I tried exploring Robert Martin's Entity-Boundary-Interactor design pattern, a use case driven architecture which provides isolation from frameworks. The idea that the core of the application should need have no knowledge of the delivery mechanism (MVC, terminal window, mobile). I feel like that's where ReactJS comes in and have since shifted focused a bit.
 
 # How to run
 
